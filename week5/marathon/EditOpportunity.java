@@ -11,7 +11,7 @@ public class EditOpportunity extends ProjectSpecificMethod {
 	
 	@BeforeTest
 	public void setValues() {
-		//Assign FileName
+		//Assign SheetName
 		SheetName = "Edit";
     }
 	
