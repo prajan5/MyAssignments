@@ -8,41 +8,55 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class LeafgroundButtonInteraction {
 
 	public static void main(String[] args) {
+			//Instantiate Browser
 		ChromeDriver driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		driver.get("https://leafground.com/button.xhtml");
+		//Maximize the browser
 		driver.manage().window().maximize();
-		driver.findElement(By.xpath("//button[@id ='j_idt88:j_idt90']/span[text()='Click']")).click();
+		//add Implicit wait
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(30));
+		//Load URL
+		driver.get("https://leafground.com/button.xhtml");
 		
-		String getTitle = driver.findElement(By.className("route-bar-breadcrumb")).getText();
-		if(getTitle.contains("Dashboard"))
+		boolean b1 = driver.findElement(By.xpath("//button/span[text()='Click']")).isEnabled();
+		System.out.println(b1);
+		//- Click on the button with the text ‘Click and Confirm title.’
+		driver.findElement(By.xpath("//button/span[text()='Click']")).click();
+		//- Verify that the title of the page is ‘dashboard.’
+		String getTitle = driver.findElement(By.xpath("//div[@class='route-bar-breadcrumb']")).getText();
+		if (getTitle.contains("Dashboard"))
 		{
-			System.out.println("Title:Dasboard is displayed");
+			System.out.println(getTitle+" displayed correctly");
 		}
 		else
-			System.out.println("Title is not Dasboard");
-		
-		//Navigate back 
+		{
+			System.out.println("title is not displayed correctly");
+		}
+		//Navigate back
 		driver.navigate().back();
+		//- Check if the button with the text ‘Confirm if the button is disabled’ is disabled.
 		
-		if(driver.findElement(By.xpath("//span[text()='Disabled']/parent::button]")).isEnabled()==true)
+		if(driver.findElement(By.xpath("//span[text()='Disabled']/parent::button")).isEnabled()==false)
 		{
-			System.out.println("Confirm button is disabled");
+		System.out.println("Confirm button is disabled");
 		}
 		else
-			System.out.println("Confirm button is not dsabled");
+		{
+			System.out.println("Confirm button is not disabled");
+		}	
+			
 		
-		//Position of the Submit button
-		System.out.println("Position of the Submit button: "+driver.findElement(By.xpath("//span[text()='Submit']")).getLocation());
+		//- Find and print the position of the button with the text ‘Submit.’
 		
-		//Color of the Save button
-		System.out.println("Color of the Save button: "+driver.findElement(By.xpath("//span[text()='Save']")).getCssValue("Color"));
-				
-		//Height and Weight  button
-		System.out.println("Height and weight of the button: "+driver.findElement(By.xpath("//button[@id='j_idt88:j_idt98']")).getSize());
-				
+		System.out.println(driver.findElement(By.xpath("//span[text()='Submit']/parent::button")).getLocation());
+			
+			
+		//- Find and print the background color of the button with the text ‘Find the Save button color.’
+		System.out.println(driver.findElement(By.xpath("//span[text()='Save']/parent::button")).getCssValue("Color"));
+		//- Find and print the height and width of the button with the text ‘Find the height and width of this button.’
+		
+		System.out.println(driver.findElement(By.xpath("//span[text()='Submit']/parent::button")).getSize());
+		//- Close the browser window.
 		driver.close();
-		
 		
 
 	}
