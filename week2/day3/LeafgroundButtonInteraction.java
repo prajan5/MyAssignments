@@ -25,7 +25,7 @@ public class LeafgroundButtonInteraction {
 		//Navigate back 
 		driver.navigate().back();
 		
-		if(driver.findElement(By.xpath("//span[text()='Disabled']")).isEnabled()==true)
+		if(driver.findElement(By.xpath("//span[text()='Disabled']/parent::button]")).isEnabled()==true)
 		{
 			System.out.println("Confirm button is disabled");
 		}
